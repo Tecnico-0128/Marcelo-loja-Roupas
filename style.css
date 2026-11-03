@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial;
+    background-color: #eee;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+}
+
+header button {
+    padding: 8px;
+}
+
+header a {
+    text-decoration: none;
+    color: black;
+}
+
+main {
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input {
+    padding: 5px;
+}
+
+button {
+    padding: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+}
