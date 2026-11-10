@@ -1,11 +1,19 @@
 
 import produtos from "../models/Produto.js"
+import vendas from "../models/Venda.js"
 
 export async function listarProduto() {
     return await produtos.findAll({
         order: [["id", "ASC"]]
     })
 }
+
+export async function listarVenda() {
+    return await vendas.findAll({
+        order: [["id", "ASC"]]
+    })
+}
+
 
 export async function cadastrarProduto(dados) {
     const { nome, preco, quantidade } = dados
@@ -23,4 +31,11 @@ export async function atualizarProduto(id, dados) {
     await produto.update({ quantidade: dados.quantidade })
 
     return produto
+}
+
+export async function cadVenda(dados) {
+     const { nome, quantidade, cliente } = dados
+
+    return await vendas.create({ nome, quantidade, cliente})
+    
 }

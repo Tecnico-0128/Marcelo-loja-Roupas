@@ -6,6 +6,11 @@ export async function listar(req, res) {
     return res.status(200).json(produto)
 }
 
+export async function listaVenda(req, res) {
+    const produto = await produtoService.listarVenda()
+    return res.status(200).json(produto)
+}
+
 export async function cadastrar(req, res) {
     const { nome, preco, quantidade } = req.body
 
@@ -35,7 +40,9 @@ export async function cadastrar(req, res) {
 export async function compra(req, res) {
     const { nome, quantidade } = req.body
 
-    if (!nome || quantidade === undefined || quantidade === null || quantidade.includes(".") || Number(quantidade) <= 0) {
+    const qtd = Number(quantidade)
+
+    if (!nome || quantidade === undefined || quantidade === null || !Number.isInteger(qtd) || qtd <= 0) {
         return res.status(400).json({ mensagem: "Nome ou quantidade invalida" })
     }
 
@@ -47,10 +54,10 @@ export async function compra(req, res) {
         return res.status(400).json({ mensagem: "Produto nao cadastrado" })
     }
 
-    const novaQuantidade = Number(produto.quantidade) + Number(quantidade)
+    const novaQuantidade = Number(produto.quantidade) + qtd
 
     const produtoAtualizado = await produtoService.atualizarProduto(
-         produto.id,
+        produto.id,
         { quantidade: novaQuantidade }
     )
 
@@ -85,6 +92,7 @@ export async function venda(req, res) {
     }
 
     const novaQuantidade = Number(produto.quantidade) - qtd
+    produtoService.cadVenda(req.body)
 
     const produtoAtualizado = await produtoService.atualizarProduto(
         produto.id,

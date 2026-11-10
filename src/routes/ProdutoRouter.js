@@ -4,6 +4,7 @@ import { Router } from 'express'
 const router = Router()
 
 router.get('/', produto.listar)
+router.get('/venda', produto.listaVenda)
 router.post('/', produto.cadastrar)
 router.post('/venda', produto.venda)
 router.post('/compra', produto.compra)
